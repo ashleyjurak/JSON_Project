@@ -1,0 +1,2 @@
+
+blons, blats, bbrightness = [], [], []

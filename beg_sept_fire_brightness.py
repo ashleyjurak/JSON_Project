@@ -8,17 +8,16 @@ bseptdata = json.load(bseptinfile)
 
 json.dump(bseptdata, bseptoutfile, indent = 4)
 
-list_of_bfires = bseptdata[]
-
 blons, blats, bbrightness = [], [], []
 
-for x in list_of_bfires:
-    lon = eq['longitude']
-    lat = eq['latitude']
-    bright = eq['brightness']
+for x in bseptdata:
+    lon = x['longitude']
+    lat = x['latitude']
+    bright = x['brightness']
     blons.append(lon)
     blats.append(lat)
-    bbrightness.append(bright)
+    if bright > 450:
+        bbrightness.append(bright)
 
 from plotly.graph_objs import Scattergeo, Layout
 from plotly import offline
@@ -28,7 +27,7 @@ data = [{
     'lon' : blons,
     'lat' : blats,
     'marker' : {
-        'size' : [5 * bright for bright in bbrightness],
+        'size' : [.05 * bright for bright in bbrightness],
         'color' : bbrightness,
         'colorscale' : 'Viridis',
         'reversescale' : True,

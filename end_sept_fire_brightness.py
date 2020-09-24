@@ -8,17 +8,16 @@ eseptdata = json.load(eseptinfile)
 
 json.dump(eseptdata, eseptoutfile, indent = 4)
 
-list_of_efires = eseptdata[]
-
 elons, elats, ebrightness = [], [], []
 
-for x in list_of_efires:
-    lon = eq['longitude']
-    lat = eq['latitude']
-    bright = eq['brightness']
+for x in eseptdata:
+    lon = x['longitude']
+    lat = x['latitude']
+    bright = x['brightness']
     elons.append(lon)
     elats.append(lat)
-    ebrightness.append(bright)
+    if bright > 450:
+        ebrightness.append(bright)
 
 from plotly.graph_objs import Scattergeo, Layout
 from plotly import offline
@@ -28,7 +27,7 @@ data = [{
     'lon' : elons,
     'lat' : elats,
     'marker' : {
-        'size' : [5 * bright for bright in ebrightness],
+        'size' : [.05 * bright for bright in ebrightness],
         'color' : ebrightness,
         'colorscale' : 'Viridis',
         'reversescale' : True,
