@@ -19,6 +19,8 @@ for x in eseptdata:
     if bright > 450:
         ebrightness.append(bright)
 
+print(ebrightness)
+
 from plotly.graph_objs import Scattergeo, Layout
 from plotly import offline
 
